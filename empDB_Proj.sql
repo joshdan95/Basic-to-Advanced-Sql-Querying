@@ -309,6 +309,63 @@ WITH total_salary (dep_name, total_salary_per_dept) as
       rank () over(partition by dept_no order by salary desc) as rnk,
       dense_rank () over(partition by dept_no order by salary desc) as Dense_rnk
       from employees e;
+----------------------------------------------------------------------------------------------
+
+use employees;
+select* from employees;
+
+alter table nielsen_emp add column age INT NOT NULL;
+alter table nielsen_emp drop column age;
+alter table nielsen_emp change firstname first_name varchar(60); /* change is the alternate to rename column */
+alter table nielsen_emp rename column first_name to firstname;
+
+alter table employees modify column firstname varchar(50); /* use modify to change the datatype */
+
+rename table employees to nielsen_emp;
+alter table nielsen_emp rename to josh_emp;
+  
+select * from nielsen_emp;
+
+insert into nielsen_emp (emp_no, birth_date, firstname, last_name, gender, hire_date) values
+(895, '1995-04-09', 'Josh', 'Dan', 'M', '2017-05-17');
+
+update josh_emp
+set hire_date = '2022-10-18', firstname = 'Josh'
+where emp_no = 895;
+select * from josh_emp
+where emp_no = 895;
+
+delete from nielsen_emp where emp_no = 10001;
+
+/*  DCL - Data Control Language
+SQL GRANT statement to grant SQL SELECT, UPDATE, INSERT, DELETE, and other privileges on tables or views
+GRANT SELECT, DELETE, UPDATE, DELETE ON Student TO Director
+GRANT SELECT, DELETE, UPDATE, DELETE ON Student TO Director WITH GRANT OPTION - allows the director to grant permission to other users.
+
+Issue REVOKE statements to withdraw privileges.
+
+For example, the following statement withdraws the SELECT privilege from user BAKER on the table SMITH.TABLEA:
+REVOKE SELECT ON TABLE SMITH.TABLEA FROM BAKER */
+grant select on nielsen_emp to joshua with grant option; /* we can use ALL insted of single previlage like select*/
+revoke select on nielsen_emp from joshua; /* cannot use ALL*/
+
+/*used after a DML query
+begin transaction;
+delete from nielsen_emp
+where emp_no = 10002;
+commit;
+
+select * from nielsen_emp; 
+
+
+update nielsen_emp 
+set hire_date = '2022-10-18', firstname = 'Joshua'
+where emp_no = 895;
+rollback;
+
+savepoint upd;
+rollback to upd;  */
+
       
    
          
