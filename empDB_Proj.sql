@@ -366,6 +366,27 @@ rollback;
 savepoint upd;
 rollback to upd;  */
 
+
+
+create table cps_emp (
+emp_id int not null,
+age int check (age>=18),
+birth_date varchar(50),
+foreign key (gender) references nielsen_emp (gender) on delete cascade,
+primary key (emp_no)
+);
+/* • CHECK - Ensures that the values in a column satisfies a specific condition
+• DEFAULT - Sets a default value for a column if no value is specified
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Sandnes'
+);
+Constraints in DDL - primary key, foreign key, unique key, not null, auto increament, check, default, on delete cacade)
+*/
+
       
    
          
