@@ -387,6 +387,19 @@ CREATE TABLE Persons (
 Constraints in DDL - primary key, foreign key, unique key, not null, auto increament, check, default, on delete cacade)
 */
 
+select first_name as full_name, gender, hire_date from employees
+where hire_date between '2021-01-22' and '2021-05-19';
+
+select*from employees
+where dept_no = 'd002' or 'd003'; /* why and not showing result... dif between and , or */
+
+select*from employees
+where dept_no in ('d002','d004');
+
+select first_name, last_name from employees
+where emp_no = ANY
+(select emp_no from salaries
+where salary > 50000);
       
    
          
