@@ -118,6 +118,18 @@ SELECT first_name,
     select * from employees
     where hire_date between '2020-02-17' and '2021-04-30'
     order by salary desc;
+
+/* 25. Write a query to display the employee id, name (first name and last name), Salary, AvgCompare (salary - the average salary of all employees) and the SalaryStatus column with a title HIGH and LOW respectively for those employees whose salary is more than and less than the average salary of all employees. */
+
+SELECT employee_id,
+       first_name,
+       last_name,
+       salary AS salary_drawn,
+       ROUND(salary - (SELECT AVG(salary) FROM employees), 2) AS avg_compare,
+       CASE WHEN salary >= (SELECT AVG(salary) FROM employees) THEN 'HIGH'
+                 ELSE 'LOW' END AS salary_status
+  FROM employees;
+
     
 /* Union all statement
 query to display max and minimum salary using union all*/
